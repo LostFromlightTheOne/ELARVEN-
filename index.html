@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELARVEN | Your Digital Creative Partner</title>
+    <meta name="description" content="Elarven helps businesses build stronger online presences through strategy, design, technology and creative content.">
+    
+    <!-- Fonts: Space Grotesk & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           VARIABLES & TOKENS
+           ========================================================================== */
+        :root {
+            /* Color Palette - Deep Atmospheric Theme */
+            --bg-primary: #050408;
+            --bg-secondary: #0A0610;
+            --bg-tertiary: #100719;
+            --bg-elevated: #160A22;
+            
+            --purple-primary: #7C3AED;
+            --purple-secondary: #8B5CF6;
+            --purple-muted: #A78BFA;
+            --purple-glow-heavy: rgba(124, 58, 237, 0.25);
+            --purple-glow-light: rgba(124, 58, 237, 0.1);
+            --purple-atmosphere: radial-gradient(circle at 50% 0%, #160A22 0%, #050408 70%);
+            
+            --text-primary: #FFFFFF;
+            --text-secondary: #E5E1EA;
+            --text-muted: #A6A0AF;
+            
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-purple: rgba(124, 58, 237, 0.3);
+
+            /* Typography */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+
+            /* Spacing & Layout */
+            --container-padding: clamp(1.5rem, 5vw, 4rem);
+            --section-spacing: clamp(6rem, 15vw, 12rem);
+            --header-height: 80px;
+
+            /* Transitions */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --transition-fast: 0.3s var(--ease-out-expo);
+            --transition-med: 0.5s var(--ease-out-expo);
+            --transition-slow: 0.8s var(--ease-out-expo);
+        }
+
+        /* ==========================================================================
+           RESET & GLOBAL
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            opacity: 0; 
+            transition: opacity 1s var(--ease-out-expo);
+            background: var(--bg-primary);
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        ::selection {
+            background-color: var(--purple-primary);
+            color: var(--text-primary);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6, .display-font {
+            font-family: var(--font-display);
+            font-weight: 500;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .text-muted { color: var(--text-muted); }
+        .text-purple { color: var(--purple-muted); }
+        .text-center { text-align: center; }
+        
+        .label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            display: inline-block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        ul, ol { list-style: none; }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           UTILITIES & LAYOUT
+           ========================================================================== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        .section {
+            padding: var(--section-spacing) 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-atmospheric {
+            background: var(--purple-atmosphere);
+        }
+
+        .grid { display: grid; }
+        .flex { display: flex; }
+        
+        .grid-2 { grid-template-columns: repeat(2, 1fr); gap: clamp(3rem, 6vw, 6rem); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        
+        @media (max-width: 1024px) {
+            .grid-2, .grid-4 { grid-template-columns: 1fr; gap: 3rem; }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .grid-3 { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        /* ==========================================================================
+           COMPONENTS
+           ========================================================================== */
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--purple-primary);
+            border-color: var(--purple-primary);
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0);
+        }
+
+        .btn-primary:hover, .btn-primary:focus-visible {
+            background: var(--purple-secondary);
+            border-color: var(--purple-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+            outline: none;
+        }
+
+        .btn-secondary {
+            border-color: var(--border-subtle);
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover, .btn-secondary:focus-visible {
+            border-color: var(--purple-primary);
+            background: rgba(124, 58, 237, 0.1);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .btn-icon {
+            margin-left: 0.75rem;
+            transition: transform var(--transition-fast);
+        }
+
+        .btn:hover .btn-icon, .btn:focus-visible .btn-icon {
+            transform: translateX(6px);
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-subtle);
+            padding: 3rem 2rem;
+            transition: all var(--transition-fast);
+            height: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--purple-primary);
+            background: rgba(124, 58, 237, 0.03);
+            transform: translateY(-5px);
+        }
+
+        /* Custom Cursor */
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            mix-blend-mode: difference;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--bg-primary);
+            opacity: 0;
+        }
+
+        #custom-cursor.active {
+            width: 80px;
+            height: 80px;
+            background: var(--purple-primary);
+            mix-blend-mode: normal;
+        }
+
+        #custom-cursor.active::after {
+            content: attr(data-text);
+        }
+
+        @media (hover: none) { #custom-cursor { display: none !important; } }
+
+        /* ==========================================================================
+           NAVIGATION
+           ========================================================================== */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            transition: all var(--transition-med);
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav-header.scrolled {
+            background: rgba(5, 4, 8, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom-color: var(--border-subtle);
+        }
+
+        .nav-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 102;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--purple-primary);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link:hover, .nav-link.active { color: var(--text-primary); }
+
+        /* Mobile Nav */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 103;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 1px;
+            background: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+        .mobile-menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-primary);
+            z-index: 101;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--container-padding);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-med);
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-nav-overlay .nav-link {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            display: block;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: flex; }
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: var(--header-height);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(circle at 70% 30%, var(--purple-glow-heavy), transparent 60%);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.3;
+            transform: perspective(1000px) rotateX(60deg) translateY(-100px) scale(2.5);
+            transform-origin: top;
+            animation: gridMove 30s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(1000px) rotateX(60deg) translateY(0) scale(2.5); }
+            100% { transform: perspective(1000px) rotateX(60deg) translateY(80px) scale(2.5); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7.5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1;
+            margin: 1.5rem 0;
+            background: linear-gradient(to right, #FFF 30%, var(--purple-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+            font-family: var(--font-display);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        .hero-desc {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 3.5rem;
+        }
+
+        .hero-actions { 
+            display: flex; 
+            gap: 1.5rem; 
+            flex-wrap: wrap;
+            justify-content: center; 
+        }
+
+        /* ==========================================================================
+           WHAT WE ACTUALLY DO
+           ========================================================================== */
+        .statement-text {
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-family: var(--font-display);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .problem-list {
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .problem-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all var(--transition-fast);
+        }
+
+        .problem-item:hover {
+            background: linear-gradient(90deg, rgba(124,58,237,0.05) 0%, transparent 100%);
+            padding-left: 1rem;
+        }
+
+        .problem-title {
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+            color: var(--purple-muted);
+        }
+
+        .problem-desc {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .problem-item { grid-template-columns: 1fr; padding: 2rem 0; gap: 1rem; }
+            .problem-item:hover { padding-left: 0; }
+        }
+
+        /* ==========================================================================
+           THE ECOSYSTEM / ENGINE
+           ========================================================================== */
+        .engine-container {
+            position: relative;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4rem;
+        }
+
+        .engine-core {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            border: 1px solid var(--purple-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            background: var(--bg-primary);
+            box-shadow: 0 0 50px var(--purple-glow-heavy);
+            transition: all var(--transition-fast);
+        }
+
+        .engine-core h3 {
+            font-size: 1.125rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .engine-nodes {
+            position: absolute;
+            inset: 0;
+        }
+
+        .engine-node {
+            position: absolute;
+            width: auto;
+            min-width: 140px;
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--border-subtle);
+            background: rgba(10, 6, 16, 0.9);
+            backdrop-filter: blur(4px);
+            border-radius: 2px;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: center;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+
+        .engine-node:hover, .engine-node.active, .engine-node:focus-visible {
+            border-color: var(--purple-primary);
+            background: var(--purple-primary);
+            color: #FFF;
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+            z-index: 20;
+            outline: none;
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .engine-lines {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .engine-lines path {
+            stroke: var(--border-subtle);
+            stroke-width: 1px;
+            fill: none;
+            transition: stroke 0.3s, stroke-width 0.3s;
+        }
+
+        .engine-lines path.active {
+            stroke: var(--purple-primary);
+            stroke-width: 2px;
+        }
+
+        .mobile-ecosystem-list {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .ecosystem-list-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+            padding: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .engine-container { display: none; }
+            .mobile-ecosystem-list { display: flex; }
+        }
+
+        /* ==========================================================================
+           SELECTED WORK
+           ========================================================================== */
+        .work-grid {
+            display: grid;
+            gap: clamp(3rem, 8vw, 8rem);
+        }
+
+        .project-card {
+            position: relative;
+            cursor: pointer;
+            display: block;
+            outline: none;
+        }
+
+        .project-visual {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: var(--bg-elevated);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-subtle);
+            transition: border-color var(--transition-fast);
+        }
+
+        .project-card:hover .project-visual, .project-card:focus-visible .project-visual {
+            border-color: var(--purple-primary);
+        }
+
+        .project-card.vertical .project-visual { 
+            aspect-ratio: 4/5; 
+        }
+        
+        @media (max-width: 768px) {
+            .project-card.vertical .project-visual { aspect-ratio: 16/9; }
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s var(--ease-out-expo), opacity 0.5s;
+            opacity: 0.7;
+        }
+
+        .project-card:hover .project-img, .project-card:focus-visible .project-img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 0.5rem;
+            transition: color var(--transition-fast);
+        }
+
+        .project-card:hover .project-title, .project-card:focus-visible .project-title {
+            color: var(--purple-muted);
+        }
+
+        .project-category {
+            color: var(--text-muted);
+            font-family: var(--font-display);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .project-status {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            padding: 0.35rem 1rem;
+            border: 1px solid var(--border-purple);
+            border-radius: 100px;
+            color: var(--purple-muted);
+            background: rgba(124, 58, 237, 0.05);
+        }
+
+        /* ==========================================================================
+           SERVICES
+           ========================================================================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1px;
+            background: var(--border-subtle);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .service-item {
+            background: var(--bg-primary);
+            padding: 3rem 2.5rem;
+            position: relative;
+            transition: all var(--transition-med);
+        }
+
+        .service-item:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0; height: 2px;
+            background: var(--purple-primary);
+            transition: width var(--transition-med);
+        }
+
+        .service-item:hover::before { width: 100%; }
+
+        .service-number {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--purple-muted);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ==========================================================================
+           INDUSTRY / ADAPTABILITY
+           ========================================================================== */
+        .industry-switcher {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .industry-list { display: flex; flex-direction: column; gap: 0; }
+        
+        .industry-btn {
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            padding: 1.5rem 0 1.5rem 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .industry-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--purple-primary);
+            transform: scaleY(0);
+            transform-origin: center;
+            transition: transform var(--transition-med);
+        }
+
+        .industry-btn:hover, .industry-btn:focus-visible { color: var(--text-secondary); outline: none; }
+        .industry-btn.active { color: var(--text-primary); background: linear-gradient(90deg, rgba(124,58,237,0.05), transparent); }
+        .industry-btn.active::before { transform: scaleY(1); }
+
+        .industry-visual {
+            aspect-ratio: 4/3;
+            background: var(--bg-elevated);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .industry-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            transition: opacity var(--transition-slow), transform 1s var(--ease-out-expo);
+        }
+
+        .industry-visual:hover .industry-img {
+            transform: scale(1.05);
+            opacity: 0.5;
+        }
+
+        .industry-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            background: rgba(5,4,8,0.7);
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all var(--transition-med);
+        }
+        
+        .industry-visual.loaded .industry-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .industry-switcher { grid-template-columns: 1fr; gap: 2rem; }
+            .industry-btn { font-size: 1.25rem; padding: 1rem 0; border-bottom: none; }
+            .industry-btn::before { width: 100%; height: 2px; top: auto; bottom: 0; left: 0; transform: scaleX(0); }
+            .industry-btn.active::before { transform: scaleX(1); }
+            .industry-btn.active { background: none; }
+            .industry-list { flex-direction: row; flex-wrap: wrap; gap: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem;}
+        }
+
+        /* ==========================================================================
+           PROCESS TIMELINE
+           ========================================================================== */
+        .process-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .process-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--border-subtle);
+        }
+
+        .process-line-active {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            width: 3px;
+            height: 0; 
+            background: var(--purple-primary);
+            box-shadow: 0 0 15px var(--purple-primary);
+            transform: translateX(-1px);
+        }
+
+        .process-step {
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: 5rem;
+            opacity: 0.3;
+            transition: all var(--transition-med);
+        }
+
+        .process-step:last-child { margin-bottom: 0; }
+
+        .process-number {
+            position: absolute;
+            left: -12px;
+            top: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            transition: all var(--transition-med);
+            z-index: 2;
+        }
+
+        .process-step.active { opacity: 1; transform: translateX(10px); }
+
+        .process-step.active .process-number {
+            border-color: var(--purple-primary);
+            background: var(--purple-primary);
+            color: #FFF;
+            box-shadow: 0 0 20px var(--purple-glow-heavy);
+        }
+
+        .process-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .process-step.active .process-title { color: #FFF; }
+
+        /* ==========================================================================
+           FORMS & CONTACT
+           ========================================================================== */
+        .form-group {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1rem 0;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            transition: border-color var(--transition-fast);
+            border-radius: 0;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-bottom-color: var(--purple-primary);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: all var(--transition-fast);
+            font-size: 1.125rem;
+        }
+
+        .form-control:focus ~ .form-label,
+        .form-control:not(:placeholder-shown) ~ .form-label {
+            top: -1rem;
+            font-size: 0.75rem;
+            color: var(--purple-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        select.form-control {
+            cursor: pointer;
+            appearance: none;
+        }
+        
+        select.form-control option {
+            background: var(--bg-elevated);
+            color: #FFF;
+            padding: 1rem;
+        }
+
+        /* ==========================================================================
+           OVERLAYS & MODALS
+           ========================================================================== */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-primary);
+            z-index: 1000;
+            overflow-y: auto;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-fast);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .overlay-header {
+            position: sticky;
+            top: 0;
+            padding: 1.5rem var(--container-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 4, 8, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 10;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            transition: color var(--transition-fast);
+        }
+        
+        .close-btn:hover, .close-btn:focus-visible { color: var(--purple-muted); outline: none; }
+
+        .overlay-content {
+            padding: 6rem var(--container-padding);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        .footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 6rem 0 2rem;
+            background: var(--bg-secondary);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+        }
+
+        /* ==========================================================================
+           ANIMATIONS & UTILS
+           ========================================================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Accessibility: Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .reveal { opacity: 1; transform: none; }
+            .hero-grid { animation: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <header class="nav-header" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo" aria-label="Elarven Home">ELARVEN</a>
+            
+            <nav class="nav-links">
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#philosophy" class="nav-link">Philosophy</a>
+                <a href="#process" class="nav-link">Process</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="btn btn-primary" style="margin-left: 1.5rem;">Start a Project</a>
+            </nav>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true">
+        <a href="#work" class="nav-link mobile-link">Work</a>
+        <a href="#services" class="nav-link mobile-link">Services</a>
+        <a href="#philosophy" class="nav-link mobile-link">Philosophy</a>
+        <a href="#process" class="nav-link mobile-link">Process</a>
+        <a href="#about" class="nav-link mobile-link">About</a>
+        <a href="#contact" class="btn btn-primary mobile-link" style="margin-top: 3rem; width: 100%; max-width: 300px;">Start a Project</a>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero section-atmospheric" id="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-grid"></div>
+            
+            <div class="container hero-content">
+                <div class="label reveal" style="transition-delay: 0.1s; border: 1px solid var(--border-purple); padding: 0.5rem 1rem; border-radius: 100px; background: rgba(124, 58, 237, 0.1);">Your Digital Creative Partner</div>
+                <h1 class="hero-title reveal" style="transition-delay: 0.2s;">Elarven</h1>
+                <p class="hero-subtitle reveal" style="transition-delay: 0.3s;">
+                    We help businesses, startups, and personal brands build stronger online presences through strategy, design, technology, and creative content.
+                </p>
+                <div class="hero-actions reveal" style="transition-delay: 0.4s;">
+                    <a href="#contact" class="btn btn-primary">Start a Project</a>
+                    <a href="#work" class="btn btn-secondary smooth-scroll">Explore Our Work</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Actually Do -->
+        <section class="section" id="statement" style="padding-bottom: 4rem;">
+            <div class="container reveal">
+                <div class="label mb-4" style="margin-bottom: 2rem;">The Reality</div>
+                <h2 class="statement-text">
+                    Your business has outgrown<br>its digital presence.
+                </h2>
+                <div class="grid grid-2" style="margin-top: 4rem; gap: 4rem;">
+                    <div>
+                        <p class="hero-desc" style="font-size: 1.25rem;">
+                            A website should not simply exist. It should communicate value, build credibility, guide users, and make it easier for people to take action.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-muted" style="margin-bottom: 2rem;">
+                            Many companies look incredibly credible offline, but weak online. Their branding is fragmented across their website, social media, and marketing materials. We fix that disconnect.
+                        </p>
+                        <p class="text-muted">
+                            Elarven doesn't just build digital assets. We create cohesive digital environments where strategy, design, technology, and content work together to represent the true quality of your business.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Presence Ecosystem Engine -->
+        <section class="section section-atmospheric" id="ecosystem" style="border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+            <div class="container">
+                <div class="text-center reveal">
+                    <div class="label" style="margin-bottom: 1rem;">The Ecosystem</div>
+                    <h2 class="display-font" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem;">Why a website isn't enough.</h2>
+                    <p class="text-muted" style="max-width: 600px; margin: 0 auto;">A strong digital presence requires interconnected components working toward a single business goal.</p>
+                </div>
+                
+                <div class="engine-container reveal">
+                    <svg class="engine-lines" id="engineLines" width="100%" height="100%"></svg>
+                    
+                    <div class="engine-core" id="engineCore">
+                        <div>
+                            <h3 style="color: var(--purple-muted);">Digital Presence</h3>
+                            <p id="engineCoreText" style="font-size: 0.875rem; color: var(--text-muted); padding: 0 1rem;">The sum of how your brand exists online.</p>
+                        </div>
+                    </div>
+
+                    <div class="engine-nodes" id="engineNodes">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Mobile Fallback for Ecosystem -->
+                <div class="mobile-ecosystem-list reveal">
+                    <div class="ecosystem-list-item">
+                        <h4 class="display-font" style="color: var(--purple-muted); margin-bottom: 0.5rem;">Strategy</h4>
+                        <p class="text-muted text-sm">Data-driven roadmaps, positioning, and digital growth planning.</p>
+                    </div>
+                    <div class="ecosystem-list-item">
+                        <h4 class="display-font" style="color: var(--purple-muted); margin-bottom: 0.5rem;">Brand</h4>
+                        <p class="text-muted text-sm">Visual identity, consistent messaging, and market positioning.</p>
+                    </div>
+                    <div class="ecosystem-list-item">
+                        <h4 class="display-font" style="color: var(--purple-muted); margin-bottom: 0.5rem;">Web Experience</h4>
+                        <p class="text-muted text-sm">Fast, responsive, and conversion-optimized platforms.</p>
+                    </div>
+                    <div class="ecosystem-list-item">
+                        <h4 class="display-font" style="color: var(--purple-muted); margin-bottom: 0.5rem;">Content & Search</h4>
+                        <p class="text-muted text-sm">High-quality storytelling and technical architecture for visibility.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Work -->
+        <section class="section" id="work">
+            <div class="container">
+                <div class="flex" style="justify-content: space-between; align-items: flex-end; margin-bottom: 5rem; flex-wrap: wrap; gap: 2rem;">
+                    <div class="reveal">
+                        <div class="label" style="margin-bottom: 1rem;">Selected Work</div>
+                        <h2 class="display-font" style="font-size: clamp(3rem, 6vw, 5rem); line-height: 1;">Digital Demonstrations</h2>
+                    </div>
+                    <p class="text-muted reveal" style="max-width: 400px;">
+                        Interactive concept projects demonstrating how we approach structural design, visual storytelling, and user experience across different industries.
+                    </p>
+                </div>
+
+                <div class="work-grid">
+                    <!-- Project 01: Aurelia -->
+                    <button class="project-card reveal" onclick="openProject('aurelia')" aria-label="View Aurelia Luxury Real Estate Details" style="width: 100%; text-align: left; background: none; border: none; padding: 0;">
+                        <div class="project-visual" data-cursor="EXPLORE">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Aurelia Luxury Real Estate" class="project-img" loading="lazy">
+                        </div>
+                        <div class="project-meta">
+                            <div>
+                                <h3 class="project-title">Aurelia Luxury Real Estate</h3>
+                                <span class="project-category">Luxury Real Estate</span>
+                            </div>
+                            <span class="project-status">Concept Experience</span>
+                        </div>
+                    </button>
+
+                    <div class="grid grid-2" style="margin-top: 2rem;">
+                        <!-- Project 02: Hotel -->
+                        <button class="project-card vertical reveal" onclick="openProject('hotel')" aria-label="View Luxury Hotel Details" style="text-align: left; background: none; border: none; padding: 0;">
+                            <div class="project-visual" data-cursor="EXPLORE">
+                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Luxury Hotel Experience" class="project-img" loading="lazy">
+                            </div>
+                            <div class="project-meta">
+                                <div>
+                                    <h3 class="project-title" style="font-size: clamp(1.5rem, 3vw, 2.5rem);">Luxury Hotel</h3>
+                                    <span class="project-category">Hospitality</span>
+                                </div>
+                                <span class="project-status">Digital Demo</span>
+                            </div>
+                        </button>
+
+                        <!-- Project 03: Construction -->
+                        <button class="project-card vertical reveal" onclick="openProject('construction')" aria-label="View Elarven Construction Details" style="text-align: left; background: none; border: none; padding: 0; margin-top: 4rem;">
+                            <div class="project-visual" data-cursor="EXPLORE">
+                                <img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Elarven Construction" class="project-img" loading="lazy">
+                            </div>
+                            <div class="project-meta">
+                                <div>
+                                    <h3 class="project-title" style="font-size: clamp(1.5rem, 3vw, 2.5rem);">Elarven Construction</h3>
+                                    <span class="project-category">B2B Enterprise</span>
+                                </div>
+                                <span class="project-status">Digital Demo</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Expansion -->
+        <section class="section" id="services" style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle);">
+            <div class="container">
+                <div class="label reveal text-center" style="margin-bottom: 1rem; width: 100%;">Capabilities</div>
+                <h2 class="display-font reveal text-center" style="font-size: clamp(3rem, 6vw, 4.5rem); margin-bottom: 5rem;">How we build presence.</h2>
+                
+                <div class="services-grid reveal">
+                    <div class="service-item">
+                        <span class="service-number">01</span>
+                        <h3 class="display-font service-title">Web Design & Dev</h3>
+                        <p class="text-muted">High-performance digital experiences designed around business goals. We focus on UX, UI, responsive architecture, and conversion-focused structures that guide users to action.</p>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-number">02</span>
+                        <h3 class="display-font service-title">Brand & Identity</h3>
+                        <p class="text-muted">Establishing visual identities that communicate credibility. From logo systems and typography direction to comprehensive brand guidelines that ensure consistency everywhere.</p>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-number">03</span>
+                        <h3 class="display-font service-title">Digital Strategy</h3>
+                        <p class="text-muted">Positioning your brand to win. We map out the digital ecosystem, determining the right customer journeys, technology stacks, and growth opportunities tailored to your market.</p>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-number">04</span>
+                        <h3 class="display-font service-title">Content & Copy</h3>
+                        <p class="text-muted">Good design requires good communication. We craft website copy, brand messaging, and educational content structured to build trust and clearly articulate your value.</p>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-number">05</span>
+                        <h3 class="display-font service-title">Search Visibility (SEO)</h3>
+                        <p class="text-muted">Ensuring your presence is found. We build strong technical foundations, search-friendly site architectures, and content strategies designed for long-term organic visibility.</p>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-number">06</span>
+                        <h3 class="display-font service-title">Creative & Social</h3>
+                        <p class="text-muted">Visual storytelling that captures attention. From social media creative direction and short-form video to UGC strategies that provide authentic social proof.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industry Adaptability -->
+        <section class="section section-atmospheric" id="industries">
+            <div class="container">
+                <div class="label reveal mb-4" style="margin-bottom: 2rem;">Adaptability</div>
+                <h2 class="display-font reveal" style="font-size: clamp(2.5rem, 5vw, 4rem); max-width: 800px; margin-bottom: 5rem;">
+                    Different business.<br>Different experience.
+                </h2>
+                
+                <div class="industry-switcher reveal">
+                    <div class="industry-list" id="industryTabs" role="tablist">
+                        <button class="industry-btn active" data-industry="realestate" role="tab" aria-selected="true">Real Estate</button>
+                        <button class="industry-btn" data-industry="hospitality" role="tab" aria-selected="false">Hospitality</button>
+                        <button class="industry-btn" data-industry="construction" role="tab" aria-selected="false">Construction / B2B</button>
+                        <button class="industry-btn" data-industry="personal" role="tab" aria-selected="false">Personal Brands</button>
+                    </div>
+                    
+                    <div class="industry-visual loaded" id="industryVisual">
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Real Estate" class="industry-img" id="industryImg">
+                        <div class="industry-content">
+                            <h3 class="display-font" style="font-size: 2rem; margin-bottom: 0.5rem;" id="industryTitle">Aurelia Standard</h3>
+                            <p class="text-secondary" id="industryDesc" style="max-width: 400px; font-size: 1.125rem;">Clean lines, expansive imagery, and a focus on architectural detail. Designed to sell space and luxury.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Timeline -->
+        <section class="section" id="process">
+            <div class="container">
+                <div class="label reveal text-center" style="margin-bottom: 1rem; width: 100%;">How We Work</div>
+                <h2 class="display-font reveal text-center" style="font-size: clamp(3rem, 6vw, 4.5rem); margin-bottom: 6rem;">From idea to digital reality.</h2>
+                
+                <div class="process-container reveal" id="processContainer">
+                    <div class="process-line"></div>
+                    <div class="process-line-active" id="processActiveLine"></div>
+                    
+                    <div class="process-step" data-step="1">
+                        <div class="process-number">01</div>
+                        <h3 class="process-title display-font">Discover & Audit</h3>
+                        <p class="text-muted" style="font-size: 1.125rem; max-width: 600px;">We begin by understanding exactly what your business needs to accomplish. We audit your current online footprint, identify the gaps, and define your target audience and market position.</p>
+                    </div>
+                    <div class="process-step" data-step="2">
+                        <div class="process-number">02</div>
+                        <h3 class="process-title display-font">Strategize</h3>
+                        <p class="text-muted" style="font-size: 1.125rem; max-width: 600px;">Mapping out the digital ecosystem. We determine the required technology stack, user journeys, content requirements, and the specific role each channel will play in your growth.</p>
+                    </div>
+                    <div class="process-step" data-step="3">
+                        <div class="process-number">03</div>
+                        <h3 class="process-title display-font">Design Direction</h3>
+                        <p class="text-muted" style="font-size: 1.125rem; max-width: 600px;">Establishing the visual language. We create wireframes, typography systems, and high-fidelity UI designs that ensure your brand looks credible, premium, and distinct.</p>
+                    </div>
+                    <div class="process-step" data-step="4">
+                        <div class="process-number">04</div>
+                        <h3 class="process-title display-font">Build & Integrate</h3>
+                        <p class="text-muted" style="font-size: 1.125rem; max-width: 600px;">Translating design into a robust, lightning-fast digital product. We focus on clean code, responsive architecture, technical SEO foundations, and seamless animations.</p>
+                    </div>
+                    <div class="process-step" data-step="5">
+                        <div class="process-number">05</div>
+                        <h3 class="process-title display-font">Launch & Evolve</h3>
+                        <p class="text-muted" style="font-size: 1.125rem; max-width: 600px;">Deployment is just the beginning. We launch the experience, monitor real-world interactions, and provide ongoing strategies to continually refine and grow your digital presence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy / Working with Elarven -->
+        <section class="section section-atmospheric" id="philosophy" style="border-top: 1px solid var(--border-subtle);">
+            <div class="container grid grid-2" style="align-items: center;">
+                <div class="reveal">
+                    <div class="label" style="margin-bottom: 1rem;">Our Philosophy</div>
+                    <h2 class="display-font" style="font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 2rem;">What working with us feels like.</h2>
+                    <p class="text-muted" style="font-size: 1.25rem; margin-bottom: 2rem;">
+                        We are not an agency that disappears for three months and returns with a template. We act as your dedicated creative partner.
+                    </p>
+                    <ul style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <li style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--purple-primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <div>
+                                <h4 class="display-font" style="font-size: 1.25rem; color: #FFF;">Business-First Thinking</h4>
+                                <p class="text-muted text-sm">Every design decision is rooted in a specific business objective.</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--purple-primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <div>
+                                <h4 class="display-font" style="font-size: 1.25rem; color: #FFF;">Clear Communication</h4>
+                                <p class="text-muted text-sm">No confusing jargon. Just transparent, highly collaborative processes.</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--purple-primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <div>
+                                <h4 class="display-font" style="font-size: 1.25rem; color: #FFF;">Attention to Detail</h4>
+                                <p class="text-muted text-sm">From micro-interactions to typography scaling, we care deeply about the finish.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="reveal" style="position: relative;">
+                    <div style="aspect-ratio: 4/5; background: var(--bg-secondary); border: 1px solid var(--border-subtle); padding: 3.5rem 3rem; display: flex; flex-direction: column; justify-content: center;">
+                        <h3 class="display-font" style="font-size: 2rem; margin-bottom: 2.5rem; color: var(--purple-muted); line-height: 1.3;">"Elarven was built on a simple belief: businesses deserve digital experiences that actually represent the quality of what they do in the real world."</h3>
+                        <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem;">
+                            <div class="label" style="color: #FFF; font-size: 0.875rem; letter-spacing: 0.12em; display: block; text-transform: uppercase;">Nathaniel Blake</div>
+                            <div class="text-muted" style="font-size: 0.8125rem; margin-top: 0.25rem;">Founder, Elarven</div>
+                        </div>
+                    </div>
+                    <!-- Decorative element -->
+                    <div style="position: absolute; bottom: -20px; right: -20px; width: 100px; height: 100px; border: 1px solid var(--purple-primary); z-index: -1;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="section" id="contact" style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle);">
+            <div class="container grid grid-2">
+                <div class="reveal">
+                    <div class="label" style="margin-bottom: 1rem;">Start a Project</div>
+                    <h2 class="display-font" style="font-size: clamp(3rem, 6vw, 5rem); line-height: 1; margin-bottom: 2rem;">Let's build<br><span style="color: var(--purple-muted);">something better.</span></h2>
+                    <p class="text-muted" style="font-size: 1.25rem; max-width: 450px; margin-bottom: 4rem;">Tell us where your business is currently, what problem you are trying to solve, and where you want to go.</p>
+                    
+                    <div style="margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(124,58,237,0.1); display: flex; align-items: center; justify-content: center; color: var(--purple-primary);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div>
+                            <div class="label" style="display: block; margin-bottom: 0.25rem;">Direct Inquiry</div>
+                            <a href="mailto:elarvencreative@gmail.com" class="display-font" style="font-size: 1.25rem; transition: color 0.3s;" onmouseover="this.style.color='var(--purple-muted)'" onmouseout="this.style.color='#FFF'">elarvencreative@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <form id="inquiryForm" class="inquiry-form" style="background: var(--bg-elevated); padding: clamp(2rem, 5vw, 4rem); border: 1px solid var(--border-subtle); box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" class="form-control" placeholder=" " required>
+                            <label for="name" class="form-label">Full Name (Required)</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
+                            <label for="email" class="form-label">Email Address (Required)</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="business" name="business" class="form-control" placeholder=" ">
+                            <label for="business" class="form-label">Business / Brand Name</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="service" name="service" class="form-control" required>
+                                <option value="" disabled selected></option>
+                                <option value="Complete Digital Presence">Complete Digital Presence (Web + Brand)</option>
+                                <option value="Web Design & Development">Web Design & Development</option>
+                                <option value="Branding & Identity">Branding & Identity</option>
+                                <option value="Digital Strategy / Consulting">Digital Strategy / Consulting</option>
+                                <option value="Not Sure - Need Guidance">Not Sure - I need guidance</option>
+                            </select>
+                            <label for="service" class="form-label" style="top: -1rem; font-size: 0.75rem; color: var(--purple-muted);">Primary Goal (Required)</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="problem" name="problem" class="form-control" rows="4" placeholder=" " required></textarea>
+                            <label for="problem" class="form-label">What problem are you trying to solve?</label>
+                        </div>
+                        
+                        <p id="formStatus" class="label" style="margin-bottom: 1.5rem; color: var(--purple-muted); display: none; text-align: center; width: 100%;">Preparing inquiry...</p>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.25rem;">Submit Project Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h2 class="display-font" style="font-size: 2.5rem; margin-bottom: 1rem; letter-spacing: 0.05em;">ELARVEN</h2>
+                    <p class="label" style="color: var(--purple-muted); margin-bottom: 2rem;">Your Digital Creative Partner.</p>
+                    <p class="text-muted" style="max-width: 300px;">Helping businesses build stronger online presences through strategy, design, technology, and creative content.</p>
+                </div>
+                <div>
+                    <h4 class="label" style="margin-bottom: 2rem; color: #FFF;">Explore</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 1rem;">
+                        <li><a href="#work" class="text-muted smooth-scroll" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--text-muted)'">Work</a></li>
+                        <li><a href="#services" class="text-muted smooth-scroll" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--text-muted)'">Services</a></li>
+                        <li><a href="#process" class="text-muted smooth-scroll" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--text-muted)'">Process</a></li>
+                        <li><a href="#philosophy" class="text-muted smooth-scroll" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--text-muted)'">Philosophy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="label" style="margin-bottom: 2rem; color: #FFF;">Connect</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 1rem;">
+                        <li class="text-muted">Nathaniel Blake</li>
+                        <li><a href="mailto:elarvencreative@gmail.com" class="text-muted" style="transition: color 0.3s;" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='var(--text-muted)'">elarvencreative@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p class="label" style="font-size: 0.7rem; color: var(--text-muted);">&copy; <span id="currentYear">2026</span> ELARVEN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Case Study Overlay -->
+    <div class="overlay" id="caseStudyOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="csTitle">
+        <div class="overlay-header">
+            <span class="label" id="csCategory" style="color: var(--purple-muted);">Project Overview</span>
+            <button class="close-btn" onclick="closeProjectOverlay()" aria-label="Close project details">
+                CLOSE
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="overlay-content">
+            <div class="label text-purple mb-4" id="csStatus" style="margin-bottom: 1rem; border: 1px solid var(--border-purple); padding: 0.25rem 0.75rem; border-radius: 100px;">Status</div>
+            <h2 class="display-font" style="font-size: clamp(3rem, 6vw, 5.5rem); margin-bottom: 3rem; line-height: 1;" id="csTitle">Title</h2>
+            
+            <div class="project-visual" style="aspect-ratio: 16/9; margin-bottom: 4rem; border: 1px solid var(--border-subtle);">
+                <img src="" id="csImage" class="project-img" style="opacity: 1; transform: none;" alt="Project Preview">
+            </div>
+
+            <div class="grid grid-2" style="margin-bottom: 5rem; gap: 4rem;">
+                <div>
+                    <h3 class="display-font" style="font-size: 1.5rem; color: var(--purple-muted); margin-bottom: 1.5rem;">The Business Problem</h3>
+                    <p class="text-muted" id="csChallenge" style="font-size: 1.125rem; line-height: 1.7;">...</p>
+                </div>
+                <div>
+                    <h3 class="display-font" style="font-size: 1.5rem; color: var(--purple-muted); margin-bottom: 1.5rem;">The Digital Solution</h3>
+                    <p class="text-muted" id="csSolution" style="font-size: 1.125rem; line-height: 1.7;">...</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding-top: 4rem; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; align-items: center; gap: 2rem;">
+                <p class="text-muted">This is a fully functional live demonstration. Experience the performance, animations, and responsive architecture firsthand.</p>
+                
+                <a id="csLiveLink" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 1.125rem; padding: 1.5rem 3rem;">
+                    EXPLORE LIVE EXPERIENCE 
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ==========================================================================
+           CONFIGURATION & DATA
+           ========================================================================== */
+        document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+        const ELARVEN_CONFIG = {
+            email: "elarvencreative@gmail.com",
+        };
+
+        const PROJECT_DATA = {
+            'aurelia': {
+                title: 'Aurelia Luxury Real Estate',
+                category: 'Luxury Real Estate',
+                status: 'Concept Experience',
+                image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
+                challenge: 'High-end real estate requires a digital presence that matches the physical properties. Standard property listings fail to convey luxury, scale, and architectural detail, reducing the perceived value of the developments.',
+                solution: 'We built a highly visual, immersive web experience featuring expansive typography, fluid animations, and a focus on high-resolution imagery. The architecture of the site reflects the architecture of the homes—premium, spacious, and intentional.',
+                url: 'https://lostfromlighttheone.github.io/Aurelia-Luxury-Real-Estate/'
+            },
+            'hotel': {
+                title: 'Luxury Hotel Experience',
+                category: 'Luxury Hospitality',
+                status: 'Digital Demonstration',
+                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
+                challenge: 'Hospitality websites often struggle between acting as functional booking engines and aspirational brand storytelling platforms. This results in generic, cluttered guest experiences that fail to sell the actual feeling of the stay.',
+                solution: 'An editorial-driven digital platform that balances seamless reservation functionality with cinematic visual storytelling. We prioritized atmospheric imagery, smooth transitions, and a conversion path that feels like a concierge service.',
+                url: 'https://lostfromlighttheone.github.io/Luxury-Hotel-Website/'
+            },
+            'construction': {
+                title: 'Elarven Construction',
+                category: 'B2B Enterprise',
+                status: 'Digital Demonstration',
+                image: 'https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
+                challenge: 'B2B construction and enterprise firms typically suffer from outdated, rigid websites. These platforms fail to communicate scale, reliability, and engineering capability, causing them to lose trust before a conversation even begins.',
+                solution: 'A robust, structured corporate identity combining bold typography, technical project showcases, and a streamlined lead generation system. The design language communicates stability, precision, and enterprise-grade capability.',
+                url: 'https://lostfromlighttheone.github.io/Elarven-Construction-demo-website/'
+            }
+        };
+
+        const INDUSTRY_DATA = {
+            'realestate': {
+                title: 'Aurelia Standard',
+                desc: 'Clean lines, expansive imagery, and a focus on architectural detail. Designed to sell space and luxury to high-net-worth individuals.',
+                img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+            },
+            'hospitality': {
+                title: 'Cinematic Hospitality',
+                desc: 'Warm tones, editorial layouts, and immersive visual integration. Designed to sell a feeling and an experience before the guest arrives.',
+                img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+            },
+            'construction': {
+                title: 'Corporate Industrial',
+                desc: 'High-contrast, structured grids, and strong typography. Designed to communicate absolute reliability, safety, and enterprise scale.',
+                img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+            },
+            'personal': {
+                title: 'Creator Authority',
+                desc: 'Personality-driven, focused on content delivery and conversion, with distinct art direction. Designed to build trust and monetize audience.',
+                img: 'https://images.unsplash.com/photo-1554774853-719586f82d77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+            }
+        };
+
+        /* ==========================================================================
+           INITIALIZATION
+           ========================================================================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => { document.body.classList.add('loaded'); }, 150);
+
+            initCursor();
+            initNavigation();
+            initSmoothScroll();
+            initScrollReveal();
+            initEngine();
+            initIndustrySwitcher();
+            initProcessTimeline();
+            initForm();
+        });
+
+        /* ==========================================================================
+           CORE SYSTEMS
+           ========================================================================== */
+        
+        /* Cursor */
+        function initCursor() {
+            const cursor = document.getElementById('custom-cursor');
+            if(window.matchMedia("(hover: none)").matches) return;
+
+            document.addEventListener('mousemove', e => {
+                requestAnimationFrame(() => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                });
+            });
+
+            document.querySelectorAll('a, button, input, select, textarea, [data-cursor]').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('active');
+                    const text = el.getAttribute('data-cursor');
+                    if (text) {
+                        cursor.setAttribute('data-text', text);
+                    } else if (el.tagName === 'A' || el.tagName === 'BUTTON') {
+                        cursor.setAttribute('data-text', '');
+                        cursor.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                    }
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('active');
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.setAttribute('data-text', '');
+                });
+            });
+        }
+
+        /* Navigation & Mobile Menu */
+        function initNavigation() {
+            const nav = document.getElementById('navbar');
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            const links = document.querySelectorAll('.mobile-link');
+
+            window.addEventListener('scroll', () => {
+                if(window.scrollY > 50) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
+            }, { passive: true });
+
+            mobileBtn.addEventListener('click', () => {
+                const isActive = mobileNav.classList.toggle('active');
+                mobileBtn.classList.toggle('active');
+                mobileBtn.setAttribute('aria-expanded', isActive);
+                document.body.style.overflow = isActive ? 'hidden' : '';
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileBtn.classList.remove('active');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        /* Smooth Scroll for anchors */
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+        }
+
+        /* Scroll Reveal (Intersection Observer) */
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        /* Digital Ecosystem Engine Interaction */
+        function initEngine() {
+            const nodesContainer = document.getElementById('engineNodes');
+            const svg = document.getElementById('engineLines');
+            const coreText = document.getElementById('engineCoreText');
+            
+            if(window.innerWidth <= 1024) return;
+
+            const nodes = [
+                { name: 'Brand Identity', text: 'The visual and verbal foundation that communicates your quality.', angle: 0 },
+                { name: 'Web Experience', text: 'The centralized hub designed to convert attention into action.', angle: 51 },
+                { name: 'Content & Copy', text: 'The messaging framework that builds trust and explains value.', angle: 102 },
+                { name: 'Social Strategy', text: 'The distribution network for brand awareness and engagement.', angle: 154 },
+                { name: 'Search (SEO)', text: 'The technical architecture ensuring your business is found.', angle: 205 },
+                { name: 'Digital Strategy', text: 'The roadmap aligning all digital channels to business goals.', angle: 257 },
+                { name: 'Creative Assets', text: 'The high-quality visual storytelling that captures attention.', angle: 308 }
+            ];
+
+            const radius = 260;
+            nodes.forEach((n, i) => {
+                const rad = (n.angle - 90) * (Math.PI / 180);
+                const x = 50 + (radius * Math.cos(rad)) / (nodesContainer.offsetWidth || 1000) * 100;
+                const y = 50 + (radius * Math.sin(rad)) / (nodesContainer.offsetHeight || 700) * 100;
+
+                const el = document.createElement('button');
+                el.className = 'engine-node';
+                el.style.left = `${x}%`;
+                el.style.top = `${y}%`;
+                el.innerText = n.name;
+                el.setAttribute('aria-label', `Learn about ${n.name}`);
+                
+                const pathId = `path-${i}`;
+                const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                pathEl.setAttribute('d', `M50,50 L${x},${y}`);
+                pathEl.setAttribute('id', pathId);
+                pathEl.setAttribute('vector-effect', 'non-scaling-stroke');
+                svg.appendChild(pathEl);
+                
+                const activate = () => {
+                    coreText.innerText = n.text;
+                    coreText.style.color = '#FFF';
+                    pathEl.classList.add('active');
+                };
+                
+                const deactivate = () => {
+                    coreText.innerText = 'The sum of how your brand exists online.';
+                    coreText.style.color = 'var(--text-muted)';
+                    pathEl.classList.remove('active');
+                };
+
+                el.addEventListener('mouseenter', activate);
+                el.addEventListener('focus', activate);
+                el.addEventListener('mouseleave', deactivate);
+                el.addEventListener('blur', deactivate);
+
+                nodesContainer.appendChild(el);
+            });
+        }
+
+        /* Industry Switcher */
+        function initIndustrySwitcher() {
+            const btns = document.querySelectorAll('.industry-btn');
+            const visualContainer = document.getElementById('industryVisual');
+            const img = document.getElementById('industryImg');
+            const title = document.getElementById('industryTitle');
+            const desc = document.getElementById('industryDesc');
+
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if(btn.classList.contains('active')) return;
+
+                    btns.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-selected', 'false');
+                    });
+                    
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-selected', 'true');
+                    
+                    const data = INDUSTRY_DATA[btn.dataset.industry];
+                    visualContainer.classList.remove('loaded');
+                    
+                    setTimeout(() => {
+                        img.src = data.img;
+                        title.innerText = data.title;
+                        desc.innerText = data.desc;
+                        
+                        setTimeout(() => {
+                            visualContainer.classList.add('loaded');
+                        }, 50);
+                    }, 400);
+                });
+            });
+        }
+
+        /* Process Timeline Scroll Logic */
+        function initProcessTimeline() {
+            const container = document.getElementById('processContainer');
+            const activeLine = document.getElementById('processActiveLine');
+            const steps = document.querySelectorAll('.process-step');
+
+            if (!container) return;
+
+            window.addEventListener('scroll', () => {
+                requestAnimationFrame(() => {
+                    const rect = container.getBoundingClientRect();
+                    const containerTop = rect.top;
+                    const containerHeight = rect.height;
+                    const windowHeight = window.innerHeight;
+
+                    const offset = windowHeight * 0.6; 
+                    
+                    if (containerTop < offset && containerTop > -containerHeight) {
+                        const progress = (offset - containerTop);
+                        const percentage = Math.min(Math.max((progress / containerHeight) * 100, 0), 100);
+                        activeLine.style.height = `${percentage}%`;
+
+                        steps.forEach((step, index) => {
+                            const stepProgress = (index) / (steps.length - 1) * 100;
+                            if (percentage >= stepProgress - 5) {
+                                step.classList.add('active');
+                            } else {
+                                step.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, { passive: true });
+        }
+
+        /* ==========================================================================
+           MODALS & PROJECT LINK HANDLING
+           ========================================================================== */
+        function openProject(id) {
+            const data = PROJECT_DATA[id];
+            if (!data) return;
+
+            document.getElementById('csTitle').innerText = data.title;
+            document.getElementById('csCategory').innerText = data.category;
+            document.getElementById('csStatus').innerText = data.status;
+            document.getElementById('csImage').src = data.image;
+            document.getElementById('csChallenge').innerText = data.challenge;
+            document.getElementById('csSolution').innerText = data.solution;
+            
+            // Explicitly set the precise URL to the anchor element directly.
+            // This is a native <a> tag with target="_blank". No navigation block exists.
+            const liveLink = document.getElementById('csLiveLink');
+            liveLink.href = data.url;
+            
+            const overlay = document.getElementById('caseStudyOverlay');
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+            
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => {
+                document.querySelector('.close-btn').focus();
+            }, 100);
+        }
+
+        function closeProjectOverlay() {
+            const overlay = document.getElementById('caseStudyOverlay');
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+            
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('caseStudyOverlay').classList.contains('active')) {
+                closeProjectOverlay();
+            }
+        });
+        
+        document.getElementById('caseStudyOverlay').addEventListener('click', (e) => {
+            // Clicks directly on the overlay background (not its children, like links) close the modal
+            if (e.target === document.getElementById('caseStudyOverlay')) {
+                closeProjectOverlay();
+            }
+        });
+
+        /* ==========================================================================
+           FORM HANDLING
+           ========================================================================== */
+        function initForm() {
+            const form = document.getElementById('inquiryForm');
+            const status = document.getElementById('formStatus');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                status.innerText = "Opening your email client...";
+                status.style.display = "block";
+
+                const subject = encodeURIComponent(`Elarven Inquiry: ${data.service} — ${data.name}`);
+                const body = encodeURIComponent(
+                    `Name: ${data.name}\n` +
+                    `Email: ${data.email}\n` +
+                    `Business/Brand: ${data.business || 'Not Provided'}\n` +
+                    `Primary Goal: ${data.service}\n\n` +
+                    `Problem to Solve:\n${data.problem}\n`
+                );
+
+                window.location.href = `mailto:${ELARVEN_CONFIG.email}?subject=${subject}&body=${body}`;
+                
+                setTimeout(() => {
+                    status.style.display = "none";
+                    form.reset();
+                }, 4000);
+            });
+        }
+    </script>
+</body>
+</html>
